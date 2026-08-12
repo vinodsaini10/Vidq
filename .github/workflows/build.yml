@@ -1,0 +1,31 @@
+name: Container Build & Vulnerability Scan
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-scan:
+    name: Build Docker Images & Trivy Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Backend Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: false
+          tags: vidpulse-backend:ci
+
+      - name: Build Frontend Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile.frontend
+          push: false
+          tags: vidpulse-frontend:ci

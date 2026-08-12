@@ -1,0 +1,6 @@
+{
+  "name": "VidPulse AI",
+  "description": "Next-generation AI-powered YouTube growth platform with keyword research, video SEO, AI script & title generators, competitor intelligence, and channel analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,20 @@
+groups:
+  - name: vidpulse_alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_request_errors_total[5m]) / rate(http_requests_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High HTTP error rate detected (>5%)"
+          description: "HTTP error rate is above 5% for more than 2 minutes."
+
+      - alert: BackendServiceDown
+        expr: up{job="vidpulse-backend"} == 0
+        for: 1m
+        labels:
+          severity: page
+        annotations:
+          summary: "VidPulse FastAPI backend is unreachable"
+          description: "Backend container container health check failed or container is offline."
